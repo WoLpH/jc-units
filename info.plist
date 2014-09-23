@@ -17,6 +17,25 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>C7405BB7-19AC-4246-961F-C2B3AB233840</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0198087A-AC3F-43B7-9602-05DA77D6B19F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
 		<array>
 			<dict>
@@ -163,6 +182,36 @@ UnitsWorkflow().do('command', '''{query}''')</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>convert</string>
+				<key>runningsubtext</key>
+				<string>Thinking...</string>
+				<key>script</key>
+				<string>from alfred_convert import UnitsWorkflow
+UnitsWorkflow().tell('convert', '''{query}''')</string>
+				<key>subtext</key>
+				<string>Enter a string with the format 'from &gt; to', like '150lbs &gt; kg'</string>
+				<key>title</key>
+				<string>Convert units</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C7405BB7-19AC-4246-961F-C2B3AB233840</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Google's unofficial calculator API to convert physical values.</string>
@@ -187,6 +236,11 @@ UnitsWorkflow().do('command', '''{query}''')</string>
 		<dict>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>C7405BB7-19AC-4246-961F-C2B3AB233840</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
 		</dict>
 		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
 		<dict>
