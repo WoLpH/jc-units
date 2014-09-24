@@ -52,12 +52,13 @@ class UnitsWorkflow(Workflow):
         super(UnitsWorkflow, self).__init__()
         self.currencies_file = os.path.join(self.cache_dir, 'currencies.txt')
         self.load_currencies()
-        self.separator = self.config.get('separator') or '>'
+        self.separators = self.config.get('separators') or [
+            self.config.get('separator') or Converter.DEFAULT_SEPARATORS]
         self.precision = self.config.get('precision') or None
-        self.config['separator'] = self.separator
+        self.config['separators'] = self.separators
         self.config['precision'] = self.precision
         self.converter = Converter(self.currencies_file,
-            separator=self.separator, precision=self.precision)
+            separators=self.separators, precision=self.precision)
 
     def load_currencies(self):
         import datetime

@@ -10,13 +10,20 @@ SPECIAL = {
 
 
 class Converter(object):
-    def __init__(self, definitions=None, separator='>', precision=None):
+    DEFAULT_SEPARATORS = [
+        '>',
+        'in',
+        'to',
+    ]
+
+    def __init__(self, definitions=None, separators=DEFAULT_SEPARATORS,
+                 precision=None):
         from pint import UnitRegistry
 
         self.ureg = UnitRegistry()
         self.ureg.load_definitions('unit_defs.txt')
         self.load_definitions(definitions)
-        self.separator = separator
+        self.separators = separators
         self.precision = precision
 
     def load_definitions(self, definitions):
@@ -35,9 +42,28 @@ class Converter(object):
 
         Q_ = self.ureg.Quantity
 
-        # step 1: split the query into an input value and output units at a
-        # self.separator
-        value, sep, units = query.partition(self.separator)
+        # step 1: split the query into an input value and output units at
+        # something from self.separators first with whitespace and fall back to
+        # without whitespace
+        value = None
+        # Trying with whitespace
+        for separator in self.separators:
+            try:
+                pattern = '\s+%s\s+' % re.escape(separator)
+                value, units = re.split(pattern, query)
+                break
+            except ValueError:
+                pass
+
+        # Trying without whitespace
+        if not value:
+            for separator in self.separators:
+                try:
+                    value, units = query.split(separator)
+                    break
+                except ValueError:
+                    pass
+
         value = re.sub(r'([A-Za-z]) ([A-Za-z])', r'\1_\2', value.strip())
         units = re.sub(r'(\w) (\w)', r'\1_\2', units.strip())
 
